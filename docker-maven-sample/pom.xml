@@ -24,12 +24,27 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>1.5.8.RELEASE</version>
+                <configuration>
+                    <mainClass>com.objcoding.docker.HelloworldApplication</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>0.4.13</version>
                 <configuration>
                     <imageName>objcoding/docker-maven-deploy:0.0.1</imageName>
-                    <baseImage>java:8</baseImage>
+                    <baseImage>java</baseImage>
                     <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
                     <resources>
                         <resource>
