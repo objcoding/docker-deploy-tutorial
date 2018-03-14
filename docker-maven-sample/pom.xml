@@ -62,7 +62,7 @@
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>0.4.13</version>
                 <configuration>
-                    <imageName>objcoding/docker-maven-deploy:0.0.2</imageName>
+                    <imageName>119.29.224.232:5000/docker-maven-deploy:0.0.4</imageName>
                     <dockerDirectory>${project.basedir}/src/main/resources/docker</dockerDirectory>
                     <resources>
                         <resource>
