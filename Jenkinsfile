@@ -14,8 +14,10 @@ pipeline {
         }
 
         stage('编译代码') {
-            withMaven(maven: 'maven 3.6') {
-                sh "mvn -U -am clean package -DskipTests"
+            steps {
+                withMaven(maven: 'maven 3.6') {
+                    sh "mvn -U -am clean package -DskipTests"
+                }
             }
         }
 
