@@ -1,8 +1,9 @@
-#!/usr/bin/env bash
+#!/bin/bash
+
 active=${1:-master}
 registry="chenghuizhang"
 timestamp=`date +%Y%m%d%H%M%S`
-servicename=chaos-website-web
+servicename=docker-jenkins-demo
 # echo `git log | grep -e 'commit [a-zA-Z0-9]*' | wc -l`
 files=`git diff --name-only HEAD~ HEAD`
 printf "git提交的文件：\n%s\n" "${files[@]}"
