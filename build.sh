@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 active=${1:-master}
 registry="chenghuizhang"
