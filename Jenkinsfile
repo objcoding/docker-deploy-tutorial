@@ -10,11 +10,15 @@ pipeline {
         stage('获取代码') {
             steps {
                 git([url: "${GIT_REPO}", branch: "docker-jenkins"])
-                withMaven() {
-                    sh "mvn -U -am clean package -DskipTests"
-                }
             }
         }
+
+        stage('编译代码') {
+            withMaven(maven: 'maven 3.6') {
+                sh "mvn -U -am clean package -DskipTests"
+            }
+        }
+
         stage('构建镜像') {
             steps {
                 sh "sh ${BUILD_IMAGE_SCRIPT_PATH} docker-jenkins"
