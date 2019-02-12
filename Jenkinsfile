@@ -10,7 +10,7 @@ pipeline {
         stage('获取代码') {
             steps {
                 git([url: "${GIT_REPO}", branch: "docker-jenkins"])
-                withMaven(maven: 'M3', mavenLocalRepo: '.repository') {
+                withMaven() {
                     sh "mvn -U -am clean package -DskipTests"
                 }
             }
