@@ -1,14 +1,11 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
+# env
 active=${1:-master}
 registry="chenghuizhang"
 timestamp=`date +%Y%m%d%H%M%S`
 servicename=docker-jenkins-sample
-# echo `git log | grep -e 'commit [a-zA-Z0-9]*' | wc -l`
-#files=`git diff --name-only HEAD~ HEAD`
-#printf "git提交的文件：\n%s\n" "${files[@]}"
-#authors=`git log --oneline -1 --format=%an`
-#printf "git提交作者：\n%s\n" "${authors[@]}"
+
 # build
 echo "开始构建：$registry/$servicename:$active-$timestamp"
 docker build --build-arg ACTIVE=${active} -t ${registry}/${servicename}:${active}-${timestamp} .
