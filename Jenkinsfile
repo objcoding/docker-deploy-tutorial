@@ -1,10 +1,16 @@
 #!/usr/bin/env groovy
 pipeline {
     agent any
+
     environment {
         GIT_REPO = "https://github.com/objcoding/docker-deploy-tutorial.git"
         BUILD_IMAGE_SCRIPT_PATH = "build.sh"
     }
+
+    tools {
+       maven 'apache-maven-3.0.1'
+    }
+
     stages {
         stage('获取代码') {
             steps {
@@ -28,7 +34,11 @@ pipeline {
         }
         stage('构建镜像') {
             steps {
-                sh "sh ${BUILD_IMAGE_SCRIPT_PATH} docker-jenkins"
+                node {
+                    checkout scm
+                    def testImage = docker.build("chenghuizhang/docker-deploy")
+                    testImage.push("tag")
+                }
             }
             post {
                 failure {
