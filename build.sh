@@ -2,7 +2,7 @@
 
 # env
 active=${1:-master}
-registry="chenghuizhang"
+registry="172.16.0.13:5000"
 timestamp=`date +%Y%m%d%H%M%S`
 servicename=docker-jenkins-sample
 
