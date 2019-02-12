@@ -13,5 +13,5 @@ echo "上传镜像（tiemstamp）：$registry/$servicename:$active-$timestamp"
 docker push ${registry}/${servicename}:${active}-${timestamp}
 echo "上传镜像（latest）：$registry/$servicename:$active-latest"
 docker tag ${registry}/${servicename}:${active}-${timestamp} ${registry}/${servicename}:${active}-latest
-docker push ${registry}/${servicename}:${active}
+docker push ${registry}/${servicename}:${active}-latest
 echo "构建完成！"
