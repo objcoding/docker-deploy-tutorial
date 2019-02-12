@@ -7,8 +7,6 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 ARG ACTIVE
 ENV ACTIVE $ACTIVE
-ENTRYPOINT ["sh", "-c", "java -jar /app.jar"]
-EXPOSE 8085
 
-HEALTHCHECK --interval=10s --timeout=3s --start-period=5m --retries=3 \
-  CMD curl -f http://localhost:8085/info || exit 1
+EXPOSE 8085
+ENTRYPOINT ["sh", "-c", "java -jar /app.jar"]
