@@ -6,28 +6,12 @@ pipeline {
         BUILD_IMAGE_SCRIPT_PATH = "build.sh"
     }
 
-    tools {
-        maven 'maven 3.6'
-    }
-
     stages {
-        stage('获取代码') {
-            steps {
-                deleteDir()
-                git([url: "${GIT_REPO}", branch: "docker-jenkins"])
-            }
-        }
-        stage('编译代码') {
-            steps {
-                sh "mvn -U -am clean package -DskipTests"
-            }
-            post {
-                failure {
-                    mail to: 'zhangchenghui.dev@gmail.com',
-                         subject: "jenkins 流水线失败",
-                         body: "编译代码失败，请尽快使用以下git命令进行代码回滚，或尽快修复错误并提交：\n" +
-                                    "git revert HEAD\n" +
-                                    "git push\n"
+        node {
+            stage('获取代码') {
+                git([url: "${GIT_REPO}", branch: "docker-jenkins"])\
+                withMaven(maven: 'M3', mavenLocalRepo: '.repository') {
+                    sh "mvn -U -am clean package -DskipTests"
                 }
             }
         }
