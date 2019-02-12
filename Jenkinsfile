@@ -7,25 +7,12 @@ pipeline {
     }
     stages {
         stage('获取代码') {
-#            when {
-#                anyOf {
-#                    branch 'sit'
-#                    branch 'qa'
-#                }
-#            }
             steps {
                 deleteDir()
                 git([url: "${GIT_REPO}", branch: "docker-jenkins"])
             }
         }
         stage('编译代码') {
-#            when {
-#                anyOf {
-#                    branch 'sit'
-#                    branch 'qa'
-#                }
-#            }
-
             steps {
                 sh "mvn -U -am clean package -DskipTests"
             }
@@ -40,13 +27,6 @@ pipeline {
             }
         }
         stage('构建镜像') {
-#            when {
-#                anyOf {
-#                    branch 'sit'
-#                    branch 'qa'
-#                }
-#            }
-
             steps {
                 sh "sh ${BUILD_IMAGE_SCRIPT_PATH} docker-jenkins"
             }
