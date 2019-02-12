@@ -7,12 +7,10 @@ pipeline {
     }
 
     stages {
-        node {
-            stage('获取代码') {
-                git([url: "${GIT_REPO}", branch: "docker-jenkins"])\
-                withMaven(maven: 'M3', mavenLocalRepo: '.repository') {
-                    sh "mvn -U -am clean package -DskipTests"
-                }
+        stage('获取代码') {
+            git([url: "${GIT_REPO}", branch: "docker-jenkins"])\
+            withMaven(maven: 'M3', mavenLocalRepo: '.repository') {
+                sh "mvn -U -am clean package -DskipTests"
             }
         }
         stage('构建镜像') {
