@@ -1,15 +1,5 @@
 #!/usr/bin/env groovy
 
-def getHost(){
-    def remote = [:]
-    remote.name = 'docker swarm manager node'
-    remote.host = '193.112.61.178'
-    remote.user = 'root'
-    remote.port = 32200
-    remote.allowAnyHosts = true
-    return remote
-}
-
 pipeline {
     agent any
     environment {
@@ -38,21 +28,6 @@ pipeline {
             }
         }
 
-        stage('init-server'){
-            steps {
-                script {
-                   server = getHost()
-                }
-            }
-        }
-
-        stage('发布版本') {
-            steps {
-                script {
-                    sshCommand remote: server, command: "~/deploy.sh"
-                }
-            }
-        }
 
     }
 }
